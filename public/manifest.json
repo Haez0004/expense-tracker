@@ -1,0 +1,11 @@
+{
+  "name": "Haez Expense Tracker",
+  "short_name": "HaezTracker",
+  "start_url": "/expense-tracker/",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#22c55e",
+  "icons": [
+    { "src": "/expense-tracker/icons.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

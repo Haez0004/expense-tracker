@@ -1,0 +1,10 @@
+.container{max-width:400px;margin:20px auto;padding:20px;font-family:system-ui}
+.balance{background:#f4f4f4;padding:15px;border-radius:10px;margin:15px 0}
+.inc-exp{display:flex;justify-content:space-between;margin-top:10px}
+.income{color:green;font-weight:bold}.expense{color:red;font-weight:bold}
+form{display:flex;flex-direction:column;gap:10px}
+input,button{padding:10px;border-radius:8px;border:1px solid #ccc}
+button{background:black;color:white;border:none;cursor:pointer}
+ul{list-style:none;padding:0;margin-top:20px}
+li{display:flex;justify-content:space-between;background:#fff;border-left:4px solid;padding:10px;margin-bottom:8px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+li.pos{border-color:green} li.neg{border-color:red}
