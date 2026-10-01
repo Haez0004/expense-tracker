@@ -38,6 +38,11 @@ function App() {
   const deleteExpense = (id) => {
     setExpenses(expenses.filter(e => e.id!== id))
   }
+  const clearAll = () => {
+  if(confirm("Delete all?")){
+    setExpenses([])
+  }
+  }
 
   const balance = expenses.reduce((acc, cur) => acc + cur.amount, 0)
   const income = expenses.filter(e => e.amount > 0).reduce((acc, cur) => acc + cur.amount, 0)
@@ -68,6 +73,7 @@ function App() {
           </li>
         ))}
       </ul>
+      <button onClick={clearAll} style={{width:'100%', marginTop:'20px', background:'#eee', padding:'12px', borderRadius:'8px', border:'none'}}>Clear All</button>
     </div>
   )
 }
