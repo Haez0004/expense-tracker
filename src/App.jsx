@@ -1,13 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import './App.css'
 
 function App() {
-  const [expenses, setExpenses] = useState(() => {
-    return JSON.parse(localStorage.getItem('expenses')) || []
+   const [expenses, setExpenses] = useState(() => {
+    try {
+      const saved = localStorage.getItem('expenses');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   })
   const [text, setText] = useState('')
   const [amount, setAmount] = useState('')
   const [editingId, setEditingId] = useState(null);
+const [search, setSearch] = useState('');
+const [monthFilter, setMonthFilter] = useState('all');
+const [category, setCategory] = useState('Food');
 
   useEffect(() => {
     localStorage.setItem('expenses', JSON.stringify(expenses))
@@ -20,10 +28,10 @@ function App() {
     else num = Math.abs(num)
 
     if(editingId){
-      setExpenses(expenses.map(e => e.id === editingId? {...e, text, amount: num} : e));
+      setExpenses(expenses.map(e => e.id === editingId? {...e, text, amount: num, category} : e));
       setEditingId(null);
     } else {
-      setExpenses([...expenses, {id: Date.now(), text, amount: num}]);
+      setExpenses([...expenses, {id: Date.now(), text, amount: num, category}]);
     }
     setText(''); setAmount('');
   }
@@ -48,6 +56,14 @@ function App() {
   const income = expenses.filter(e => e.amount > 0).reduce((acc, cur) => acc + cur.amount, 0)
   const exp = expenses.filter(e => e.amount < 0).reduce((acc, cur) => acc + cur.amount, 0)
 
+const filteredExpenses = useMemo(() => {
+  return expenses.filter(ex => {
+    const matchSearch = ex.text.toLowerCase().includes(search.toLowerCase())
+    const exMonth = new Date(ex.id).getMonth()
+    const matchMonth = monthFilter === 'all' || exMonth == monthFilter
+    return matchSearch && matchMonth
+  })
+}, [expenses, search, monthFilter])
   return (
     <div className="container">
       <h1>Haez Expense Tracker</h1>
@@ -64,8 +80,19 @@ function App() {
           <button onClick={()=>addTransaction('expense')} style={{flex:1, background:'#ef4444', color:'white'}}>{editingId? 'Update as Expense' : 'Add Expense'}</button>
         </div>
       </div>
+
+<div style={{display: 'flex', gap: '10px', marginTop: '15px', marginBottom: '12px'}}>
+  <input value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." style={{flex: 2, padding: '10px', borderRadius: '8px', border: '1px solid #444'}} />
+  <select value={monthFilter} onChange={e=>setMonthFilter(e.target.value)} style={{flex: 1, padding: '10px', borderRadius: '8px'}}>
+    <option value="all">All Months</option>
+    <option value="0">Jan</option><option value="1">Feb</option><option value="2">Mar</option>
+    <option value="3">Apr</option><option value="4">May</option><option value="5">Jun</option>
+    <option value="6">Jul</option><option value="7">Aug</option><option value="8">Sep</option>
+    <option value="9">Oct</option><option value="10">Nov</option><option value="11">Dec</option>
+  </select>
+</div>
       <ul>
-        {expenses.map(ex => (
+        {filteredExpenses.map(ex => (
           <li key={ex.id} className={ex.amount < 0? 'negative' : 'positive'}>
             {ex.text} <span>{ex.amount}</span>
             <button onClick={()=>editTransaction(ex.id)} style={{marginLeft:'10px'}}>Edit</button>
