@@ -100,7 +100,7 @@ const filteredExpenses = useMemo(() => {
           </li>
         ))}
       </ul>
-      <button onClick={clearAll} style={{width:'100%', marginTop:'20px', background:'#eee', padding:'12px', borderRadius:'8px', border:'none'}}>Clear All</button>
+      <button onClick={clearAll} style={{width:'100%', marginTop:'20px', background:'#ff0000', padding:'12px', borderRadius:'8px', border:'none'}}>Clear All</button>
     </div>
   )
 }
