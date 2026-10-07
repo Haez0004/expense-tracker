@@ -1,0 +1,15 @@
+import Balance from './components/Balance'
+import TransactionForm from './components/TransactionForm'
+import TransactionList from './components/TransactionList'
+// ... keep your useState, useEffect, useMemo logic
+
+return (
+  <div className="min-h-screen bg-zinc-900 text-white p-4 max-w-md mx-auto">
+    <h1 className="text-3xl font-bold text-center mb-4">Haez Expense Tracker</h1>
+    <Balance balance={balance} income={income} expense={exp} />
+    <TransactionForm text={text} setText={setText} amount={amount} setAmount={setAmount} onAdd={addTransaction} editingId={editingId} />
+    {/* your search + month filter stays here */}
+    <TransactionList expenses={filteredExpenses} onEdit={editTransaction} onDelete={deleteExpense} />
+    <button onClick={clearAll} className="w-full mt-5 bg-red-600 p-3 rounded-xl">Clear All</button>
+  </div>
+)

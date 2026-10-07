@@ -5,7 +5,7 @@ function App() {
    const [expenses, setExpenses] = useState(() => {
     try {
       const saved = localStorage.getItem('expenses');
-      return saved ? JSON.parse(saved) : [];
+      return saved? JSON.parse(saved) : [];
     } catch {
       return [];
     }
