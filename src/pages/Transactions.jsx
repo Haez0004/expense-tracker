@@ -66,7 +66,7 @@ function Transactions({ transactions, setTransactions }) {
             </div>
           ) : (
             <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-              <span style={{flex: 1}}>{t.text} - ₦{t.amount}</span>
+              <span style={{flex: 1, color: "white"}}>{t.text} - ₦{t.amount}</span>
               <div style={{display: "flex", gap: "12px"}}>
                 <button onClick={() => startEdit(t)} style={{background: "#2196F3", color: "white", border: "none", padding: "6px 12px", borderRadius: "6px"}}>Edit</button>
                 <button onClick={() => handleDelete(t.id)} style={{background: "#f44336", color: "white", border: "none", padding: "6px 12px", borderRadius: "6px"}}>Delete</button>
