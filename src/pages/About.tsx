@@ -1,3 +1,4 @@
+
 export default function About() {
   return (
     <div className="p-4 space-y-4 pb-24">
@@ -42,7 +43,7 @@ export default function About() {
         <h2 className="text-white font-semibold text-sm">📱 Features</h2>
         <ul className="text-zinc-400 text-xs space-y-1.5 leading-relaxed mt-3">
           <li>• public/manifest.json - makes app installable (standalone display and icon)</li>
-          <li>• public/sw.js - Service Worker caches assets for offline use</li>
+          <li>• public/Service Worker.js - Service Worker caches assets for offline use</li>
           <li>• Install prompt on Android/Chrome</li>
           <li>• Works fully offline after first load</li>
           <li>• Edit & Delete transactions</li>
